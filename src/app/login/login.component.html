@@ -1,0 +1,7 @@
+@if(!is_url_created){
+ <input type="text" [(ngModel)]="ip_address">
+ <button type="submit" (click)="createConnection()">connect</button>
+}
+@if(is_url_created){
+ <app-username></app-username>
+}
