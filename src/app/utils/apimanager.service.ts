@@ -8,4 +8,7 @@ export class ApimanagerService {
  doPost(url: string, body: any) {
   return this.http.post(url, body);
  }
+ doGet(url : string){
+  return this.http.get(url);
+ }
 }

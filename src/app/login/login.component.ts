@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SocketService } from '../utils/socket.service';
-import { ApimanagerService } from '../utils/apimanager.service';
 import { ConstantsService } from '../utils/constants.service';
 import { UsernameComponent } from "./username/username.component";
 import { DbmanagerService } from '../utils/dbmanager.service';
@@ -15,7 +14,7 @@ export class LoginComponent implements OnInit {
 
  ip_address: string = '';
  is_url_created: boolean = false;
- constructor(private socket: SocketService, private apiManager: ApimanagerService) { }
+ constructor(private readonly socket: SocketService) { }
  ngOnInit() {
   this.checkURL();
  }
@@ -23,10 +22,11 @@ export class LoginComponent implements OnInit {
   let url = DbmanagerService.getItem(ConstantsService.URL_KEY);
   if (url) {
    this.is_url_created = true;
+   ConstantsService.URl = url;
   }
  }
- async createConnection() {
+createConnection() {
   ConstantsService.setUrl(this.ip_address);
-  await this.socket.socketConnect(() => this.checkURL());
+  this.socket.socketConnect(() => this.checkURL());
  }
 }

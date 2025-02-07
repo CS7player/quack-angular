@@ -4,6 +4,7 @@ import { SocketService } from '../../utils/socket.service';
 import { ApimanagerService } from '../../utils/apimanager.service';
 import { ConstantsService } from '../../utils/constants.service';
 import { DbmanagerService } from '../../utils/dbmanager.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-username',
@@ -13,18 +14,20 @@ import { DbmanagerService } from '../../utils/dbmanager.service';
 })
 export class UsernameComponent implements OnInit{
  username:string = '';
- constructor(private socket : SocketService,private apiManager : ApimanagerService){}
+ constructor(private readonly apiManager : ApimanagerService,private readonly router : Router){}
  ngOnInit() {
   
  }
  setUsername(){
-  this.apiManager.doPost(ConstantsService.URl,{"username":this.username}).subscribe({
+  let url = ConstantsService.URl+'username/';
+  this.apiManager.doPost(url,{"username":this.username}).subscribe({
    next: (res: any) => {
     if (res['status']) {
      DbmanagerService.setItem(ConstantsService.USER_ID_KEY,res['user_id']);
+     this.router.navigate(['layout']);
     }
    }, error: (err) => {
-    
+    console.log(err)
    }
   })
  }

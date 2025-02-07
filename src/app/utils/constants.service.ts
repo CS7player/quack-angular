@@ -10,6 +10,7 @@ export class ConstantsService {
   static readonly URL_KEY :string = 'url_key';
   static readonly USER_ID_KEY:string = 'user_id_key'; // user Ip_address
   static setUrl(ip : string){
-   ConstantsService.URl = `http://${ip}:4444`;
+   ConstantsService.URl = `http://${ip}:4444/`;
   }
+  
 }
