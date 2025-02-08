@@ -1,3 +1,4 @@
-<p>username works!</p>
-<input type="text" [(ngModel)]="username">
-<button type="submit" (click)="setUsername()">Enter</button>
+<div class="username_container">
+  <input type="text" placeholder="Username" [(ngModel)]="username" (keydown)="is_valid()" [ngClass]="is_Valid" />
+  <button type="submit" (click)="is_valid_username()">Join Hub</button>
+</div>

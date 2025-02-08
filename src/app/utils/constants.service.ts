@@ -12,5 +12,7 @@ export class ConstantsService {
   static setUrl(ip : string){
    ConstantsService.URl = `http://${ip}:4444/`;
   }
+  static readonly IPV4 = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  static readonly IPV6 = /([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}/;
   
 }

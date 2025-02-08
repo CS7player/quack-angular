@@ -4,4 +4,56 @@
   padding: 0;
 }
 
+.home_container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(114, 114, 114);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+.home_container input {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.home_container button {
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+}
+
+.loader {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(178, 151, 151, 0.4823529412);
+}
+
+.loader i {
+  font-size: 3rem;
+}
+
+.username_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.is_valid {
+  border: 0.2rem solid green;
+}
+
+.is_not_valid {
+  border: 0.2rem solid red;
+}
+
 /*# sourceMappingURL=styles.css.map */

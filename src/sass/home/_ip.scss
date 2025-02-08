@@ -1,0 +1,36 @@
+.home_container{
+ width: 100vw;
+ height: 100vh;
+ background-color: rgb(114, 114, 114);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ row-gap: 1rem;
+ input{
+  padding: 0.5rem;
+  font-size: 1rem;
+ }
+ button{
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+ }
+}
+
+.loader{
+ position: absolute;
+ width: 100vw;
+ height: 100vh;
+ z-index: 9;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ top: 0;
+ left: 0;
+ background-color: #b297977b;
+}
+
+.loader i {
+ font-size: 3rem; 
+ // color: #000;
+}
