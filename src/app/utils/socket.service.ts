@@ -4,47 +4,72 @@ import { ConstantsService } from './constants.service';
 import { BehaviorSubject } from 'rxjs';
 import { DbmanagerService } from './dbmanager.service';
 @Injectable({
- providedIn: 'root'
+  providedIn: 'root',
 })
 export class SocketService {
- private socket: Socket | null = null;
- private isConnected: boolean = false;
- constructor() { }
+  private socket: Socket | null = null;
+  private user_list_data = new BehaviorSubject<any>([]);
+  user_list = this.user_list_data.asObservable();
+  constructor() {
+    this.reconnetion();
+  }
 
- socketConnect(callback: any) {
-  if (!this.socket || !this.socket?.connected) {
-   this.socket = io(ConstantsService.URl,{ transports: ['websocket'],reconnection: false});
+  socketConnect(callback: any) {
+    if (!this.socket || !this.socket?.connected) {
+      this.socket = io(ConstantsService.URl, {
+        transports: ['websocket'],
+        reconnection: false,
+      });
 
-   this.socket.on('connected', async (data) => {
-    if (data['status']) {
-     DbmanagerService.setItem(ConstantsService.URL_KEY, ConstantsService.URl);
-     this.isConnected = true;
-     callback();
+      this.socket.on('connected', async (data) => {
+        if (data['status']) {
+          DbmanagerService.setItem(
+            ConstantsService.URL_KEY,
+            ConstantsService.URl
+          );
+          callback();
+        }
+      });
+
+      this.socket.on('connect_error', (error) => {
+        callback();
+        alert(
+          'Failed to connect to the server. Please check the IP address and try again.'
+        );
+        this.handleConnectionError();
+      });
+
+      this.socket.on('get_user_list', (res) => {
+        if(res['status']){
+         this.upDateUserList(res['data']);
+        }
+      });
     }
-   });
-
-   this.socket.on('connect_error', (error) => {
-    callback();
-    alert('Failed to connect to the server. Please check the IP address and try again.');
-    this.handleConnectionError();
-   });
-
-
-   this.socket.on('test',(res)=>{
-
-   })
   }
- }
 
- private handleConnectionError() {
-  this.isConnected = false;
-  if (this.socket) {
-    this.socket.disconnect();
+  private handleConnectionError() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
   }
-}
 
- sendNotification(){
-  
- }
+  private reconnetion() {
+    let url = DbmanagerService.getItem(ConstantsService.URL_KEY);
+    if (url) {
+      ConstantsService.URl = url;
+      this.socketConnect(() => {});
+    }
+  }
 
+  joinHub(userData: any) {
+    if (this.socket) {
+      this.socket.emit('join_hub', userData);
+    } else {
+      console.error('Socket not connected. Please connect first.');
+    }
+  }
+
+  upDateUserList(data : any){
+   this.user_list_data.next(data);
+  }
 }

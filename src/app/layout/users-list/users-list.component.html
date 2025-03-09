@@ -1,1 +1,7 @@
-<p>users-list works!</p>
+<div class="user_list_container">
+ @for (user of users_list; track $index) {
+  <div class="user">
+   <button>{{user['user_name']}}</button>
+  </div>
+ }
+</div>

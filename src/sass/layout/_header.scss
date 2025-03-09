@@ -1,0 +1,22 @@
+.header {
+  width: 100vw;
+  height: 7vh;
+  background-color: aqua;
+}
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.7rem;
+  i{
+   margin-left: 1rem;
+   margin-right: 1rem;
+  }
+  p{
+   font-size: 1.7rem;
+  }
+}
+.layout{
+ width: 100%;
+ height: 100%;
+}
