@@ -41,11 +41,12 @@ export class LayoutComponent implements OnInit{
    this.get_username();
   })
  }
+
  get_username(){
   let user = this.users_list.find((user : any) => user['user_id'] == this.user_id );
   if(user){
    this.username = user['user_name'];
   }
  }
-
+ //testing for mergeing chandra51201
 }
