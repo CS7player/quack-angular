@@ -1,12 +1,14 @@
 
 <div class="layout">
  <div class="header">
-  <app-header [username]="username"></app-header>
+  <app-header [username]="username" (eventEmitter)="isShownUserList = $event"></app-header>
  </div>
  <div class="main-container">
-  <div class="user_list">
-   <app-users-list [users_list]="users_list"></app-users-list>
-  </div>
+  @if(isShownUserList){
+   <div class="user_list" @slideLeftInOut>
+    <app-users-list [users_list]="users_list"></app-users-list>
+   </div>
+  }
   <div class="chat-box">
    <app-chat-box></app-chat-box>
   </div>

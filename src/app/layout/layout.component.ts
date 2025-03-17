@@ -7,17 +7,20 @@ import { HeaderComponent } from "./header/header.component";
 import { UsersListComponent } from "./users-list/users-list.component";
 import { SocketService } from '../utils/socket.service';
 import { ChatBoxComponent } from "./chat-box/chat-box.component";
+import { slideLeftInOut } from '../utils/animation';
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [HeaderComponent, UsersListComponent, ChatBoxComponent],
-  templateUrl: './layout.component.html'
+  templateUrl: './layout.component.html',
+  animations: [slideLeftInOut],
 })
 export class LayoutComponent implements OnInit{
 
  user_id:string = '';
  username:string = 'chandra';
  users_list : any = [];
+ isShownUserList: boolean = false;
  constructor(private readonly router : Router,private readonly apiManager : ApimanagerService,private readonly socket: SocketService){}
  ngOnInit() {
   this.get_user_id();
