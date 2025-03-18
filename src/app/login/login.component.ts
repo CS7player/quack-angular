@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private readonly socket: SocketService) {}
   ngOnInit() {
     this.checkURL();
+    DbmanagerService.setItem('is_refresh',0+"");
   }
   checkURL() {
     this.is_loader = false;

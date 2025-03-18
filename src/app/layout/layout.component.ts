@@ -8,48 +8,55 @@ import { UsersListComponent } from "./users-list/users-list.component";
 import { SocketService } from '../utils/socket.service';
 import { ChatBoxComponent } from "./chat-box/chat-box.component";
 import { slideLeftInOut } from '../utils/animation';
+import { OutsideClickService } from '../utils/outsideclick.service';
 @Component({
-  selector: 'app-layout',
-  standalone: true,
-  imports: [HeaderComponent, UsersListComponent, ChatBoxComponent],
-  templateUrl: './layout.component.html',
-  animations: [slideLeftInOut],
+ selector: 'app-layout',
+ standalone: true,
+ imports: [HeaderComponent, UsersListComponent, ChatBoxComponent],
+ templateUrl: './layout.component.html',
+ animations: [slideLeftInOut],
 })
-export class LayoutComponent implements OnInit{
+export class LayoutComponent implements OnInit {
 
- user_id:string = '';
- username:string = 'chandra';
- users_list : any = [];
+ username: string = 'chandra';
+ users_list: any = [];
  isShownUserList: boolean = false;
- constructor(private readonly router : Router,private readonly apiManager : ApimanagerService,private readonly socket: SocketService){}
+ receiver_id: string = '';
+ isRefresh :boolean = false;
+ user_id:any = DbmanagerService.getItem(ConstantsService.USER_ID_KEY);
+ constructor(private readonly router: Router, private readonly apiManager: ApimanagerService, private readonly socket: SocketService , private readonly osc : OutsideClickService) { }
  ngOnInit() {
   this.get_user_id();
   this.get_users();
+  this.osc.clickOutsideEmitter.subscribe((res)=>{
+   this.isShownUserList = false;
+  })
  }
- get_user_id(){
-  let user_id = DbmanagerService.getItem(ConstantsService.USER_ID_KEY);
+ get_user_id() {
   let url = DbmanagerService.getItem(ConstantsService.URL_KEY);
-  if(user_id && url){
+  if (this.user_id && url) {
    ConstantsService.URl = url;
-   this.user_id = user_id;
+   this.user_id = this.user_id;
    this.socket.joinHub({});
   }
-  else{
+  else {
    this.router.navigate(['login']);
   }
  }
- get_users(){
-  this.socket.user_list.subscribe( data => {
-   this.users_list = data;
+ get_users() {
+  this.socket.user_list.subscribe(data => {
+   this.users_list = data.filter((m: any) => m.user_id != this.user_id);;
    this.get_username();
   })
  }
 
- get_username(){
-  let user = this.users_list.find((user : any) => user['user_id'] == this.user_id );
-  if(user){
+ get_username() {
+  let user = this.users_list.find((user: any) => user['user_id'] == this.user_id);
+  if (user) {
    this.username = user['user_name'];
   }
  }
  //testing for mergeing chandra51201
+
+
 }

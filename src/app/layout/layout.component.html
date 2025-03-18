@@ -1,16 +1,15 @@
-
 <div class="layout">
  <div class="header">
   <app-header [username]="username" (eventEmitter)="isShownUserList = $event"></app-header>
  </div>
  <div class="main-container">
   @if(isShownUserList){
-   <div class="user_list" @slideLeftInOut>
-    <app-users-list [users_list]="users_list"></app-users-list>
-   </div>
+  <div class="user_list custom-close" @slideLeftInOut>
+   <app-users-list [users_list]="users_list" (eventEmitter)="isRefresh = $event" (closeEmitter)="isShownUserList = $event"></app-users-list>
+  </div>
   }
   <div class="chat-box">
-   <app-chat-box></app-chat-box>
+   <app-chat-box [isRefresh]="isRefresh"></app-chat-box>
   </div>
  </div>
 </div>
