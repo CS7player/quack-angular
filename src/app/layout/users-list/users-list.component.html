@@ -1,7 +1,8 @@
 <div class="user_list_container">
  @for (user of users_list; track $index) {
-  <div class="user">
-   <button (click)="selectUser(user)" [ngClass]="user['user_id'] == selected_user ? 'high-light' : ''">{{user['user_name']}}</button>
-  </div>
+ <div class="user">
+  <button (click)="selectUser(user)"
+   [ngClass]="user['user_id'] == selected_user ? 'high-light' : ''">{{user['user_name']}}</button>
+ </div>
  }
 </div>

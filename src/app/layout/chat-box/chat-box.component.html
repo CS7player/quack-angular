@@ -1,20 +1,19 @@
 <div class="content">
  <div class="msg-container mt01">
   @for(msg of chat_data;track $index){
-   <div class="msg-text-box" [ngClass]="msg['sender_id'] == sender_id ? 'end':''">
-    <div class="msg-text-class" >
-     {{msg['msg']}}
-    </div>
+  <div class="msg-text-box" [ngClass]="msg['sender_id'] == sender_id ? 'end':''">
+   <div class="msg-text-class">
+    {{msg['msg']}}
    </div>
+  </div>
   }
  </div>
  <div class="msg-text">
   <div class="msgInput">
-   <input  type="text" [(ngModel)]="msg">
-  <button class="send-button" (click)="sendMsg()">
-   <img [src]="send_icon" alt="send">
-  </button>
+   <input type="text" [(ngModel)]="msg">
+   <button class="send-button" (click)="sendMsg()">
+    <img [src]="send_icon" alt="send">
+   </button>
   </div>
-  
  </div>
 </div>

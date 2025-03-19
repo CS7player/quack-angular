@@ -1,15 +1,15 @@
 <div class="home_container">
-  @if(!is_url_created){
-  <input type="text" [(ngModel)]="ip_address" (keydown)="validateIP()" />
-  <button type="submit" (click)="createConnection()" [disabled]="is_valid">
-    connect
-  </button>
-  } @if(is_url_created){
-  <app-username></app-username>
-  }
+ @if(!is_url_created){
+ <input type="text" [(ngModel)]="ip_address" (keydown)="validateIP()" />
+ <button type="submit" (click)="createConnection()" [disabled]="is_valid">
+  connect
+ </button>
+ } @if(is_url_created){
+ <app-username></app-username>
+ }
 </div>
 @if(is_loader){
 <div class="loader">
-  <i class="fa-solid fa-gear fa-spin fa-xl"></i>
+ <i class="fa-solid fa-gear fa-spin fa-xl"></i>
 </div>
 }

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
  standalone: true,
  imports: [FormsModule, CommonModule],
  templateUrl: './chat-box.component.html',
- styleUrls : [],
+ styleUrls: [],
 
 })
 export class ChatBoxComponent implements OnInit {
@@ -21,7 +21,7 @@ export class ChatBoxComponent implements OnInit {
  sender_id = DbmanagerService.getItem("user_id_key");
  send_icon: string = ConstantsService.SEND_ICON;
  subscription: any = "";
- msg:String= "";
+ msg: String = "";
  constructor(private readonly socket: SocketService) { }
  ngOnInit(): void {
   this.getChatHistory()
@@ -31,37 +31,38 @@ export class ChatBoxComponent implements OnInit {
    this.receiver_id = DbmanagerService.getItem("selected_user_id");
    const obj = { "receiver_id": this.receiver_id, "sender_id": this.sender_id }
    this.socket.getChatHistory(obj);
-   DbmanagerService.setItem("is_refresh",this.isRefresh + "");
-   if (this.subscription){
+   DbmanagerService.setItem("is_refresh", this.isRefresh + "");
+   if (this.subscription) {
     this.getChatHistory();
-   } 
+   }
   }
  }
 
  getChatHistory() {
-  this.subscription = this.socket.getChatHistoryData().subscribe((res : any) => {
+  this.subscription = this.socket.getChatHistoryData().subscribe((res: any) => {
    this.dataModifier(res['data'] || []);
   })
  }
 
- dataModifier(data : any){
-  this.chat_data = data.sort((a:any,b:any)=> a.time - b.time);
+ dataModifier(data: any) {
+  this.chat_data = data.sort((a: any, b: any) => a.time - b.time);
  }
 
- sendMsg(){
-  const data = { 
+ sendMsg() {
+  const data = {
    "sender_id": this.sender_id,
    "receiver_id": this.receiver_id,
-   "msg":this.msg,
-   "time": this.getTime() 
+   "msg": this.msg,
+   "time": this.getTime()
   };
   this.socket.sendMsg(data);
+  this.chat_data.push(data);
   this.msg = "";
  }
 
  getTime(): number {
   const date = new Date();
-  return (date.getHours()*60*60) + (date.getMinutes()*60) + date.getSeconds();
+  return (date.getHours() * 60 * 60) + (date.getMinutes() * 60) + date.getSeconds();
  }
 
 }

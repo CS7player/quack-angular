@@ -22,13 +22,13 @@ export class LayoutComponent implements OnInit {
  users_list: any = [];
  isShownUserList: boolean = false;
  receiver_id: string = '';
- isRefresh :boolean = false;
- user_id:any = DbmanagerService.getItem(ConstantsService.USER_ID_KEY);
- constructor(private readonly router: Router, private readonly apiManager: ApimanagerService, private readonly socket: SocketService , private readonly osc : OutsideClickService) { }
+ isRefresh = 0;
+ user_id: any = DbmanagerService.getItem(ConstantsService.USER_ID_KEY);
+ constructor(private readonly router: Router, private readonly apiManager: ApimanagerService, private readonly socket: SocketService, private readonly osc: OutsideClickService) { }
  ngOnInit() {
   this.get_user_id();
   this.get_users();
-  this.osc.clickOutsideEmitter.subscribe((res)=>{
+  this.osc.clickOutsideEmitter.subscribe((res) => {
    this.isShownUserList = false;
   })
  }

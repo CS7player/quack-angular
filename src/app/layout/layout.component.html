@@ -5,7 +5,8 @@
  <div class="main-container">
   @if(isShownUserList){
   <div class="user_list custom-close" @slideLeftInOut>
-   <app-users-list [users_list]="users_list" (eventEmitter)="isRefresh = $event" (closeEmitter)="isShownUserList = $event"></app-users-list>
+   <app-users-list [users_list]="users_list" (eventEmitter)="isRefresh = $event"
+    (closeEmitter)="isShownUserList = $event"></app-users-list>
   </div>
   }
   <div class="chat-box">

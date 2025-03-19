@@ -7,24 +7,24 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-username',
-  standalone: true,
-  imports: [FormsModule,CommonModule],
-  templateUrl: './username.component.html'
+ selector: 'app-username',
+ standalone: true,
+ imports: [FormsModule, CommonModule],
+ templateUrl: './username.component.html'
 })
-export class UsernameComponent implements OnInit{
- username:string = '';
+export class UsernameComponent implements OnInit {
+ username: string = '';
  is_Valid = '';
- constructor(private readonly apiManager : ApimanagerService,private readonly router : Router){}
+ constructor(private readonly apiManager: ApimanagerService, private readonly router: Router) { }
  ngOnInit() {
-  
+
  }
- setUsername(){
-  let url = ConstantsService.URl+'username/';
-  this.apiManager.doPost(url,{"username":this.username}).subscribe({
+ setUsername() {
+  let url = ConstantsService.URl + 'username/';
+  this.apiManager.doPost(url, { "username": this.username }).subscribe({
    next: (res: any) => {
     if (res['status']) {
-     DbmanagerService.setItem(ConstantsService.USER_ID_KEY,res['user_id']);
+     DbmanagerService.setItem(ConstantsService.USER_ID_KEY, res['user_id']);
      this.router.navigate(['layout']);
     }
    }, error: (err) => {
@@ -32,20 +32,20 @@ export class UsernameComponent implements OnInit{
    }
   })
  }
- is_valid_username(){
-  if(this.username.length < 4 || this.username.length > 8){
+ is_valid_username() {
+  if (this.username.length < 4 || this.username.length > 8) {
    alert('the Username must be between the 4 to 8 letter only.')
   }
-  else{
+  else {
    this.setUsername();
   }
  }
- is_valid(){
-  if(this.username.length == 0){
+ is_valid() {
+  if (this.username.length == 0) {
    this.is_Valid = ''
-  }else if(this.username.length < 4 || this.username.length > 8){
+  } else if (this.username.length < 4 || this.username.length > 8) {
    this.is_Valid = 'is_not_valid';
-  }else{
+  } else {
    this.is_Valid = 'is_valid';
   }
  }
