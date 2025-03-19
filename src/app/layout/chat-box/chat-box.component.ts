@@ -24,7 +24,8 @@ export class ChatBoxComponent implements OnInit {
  msg: String = "";
  constructor(private readonly socket: SocketService) { }
  ngOnInit(): void {
-  this.getChatHistory()
+  this.getChatHistory();
+  this.getupdate();
  }
  ngOnChanges(changes: SimpleChanges) {
   if (changes["isRefresh"]) {
@@ -46,6 +47,9 @@ export class ChatBoxComponent implements OnInit {
 
  dataModifier(data: any) {
   this.chat_data = data.sort((a: any, b: any) => a.time - b.time);
+  this.chat_data.map((m:any)=>{
+   m['display_time'] = this.convertSecondsToTime(m['time']);
+  })
  }
 
  sendMsg() {
@@ -53,7 +57,8 @@ export class ChatBoxComponent implements OnInit {
    "sender_id": this.sender_id,
    "receiver_id": this.receiver_id,
    "msg": this.msg,
-   "time": this.getTime()
+   "time": this.getTime(),
+   "display_time": this.convertSecondsToTime(this.getTime())
   };
   this.socket.sendMsg(data);
   this.chat_data.push(data);
@@ -64,5 +69,22 @@ export class ChatBoxComponent implements OnInit {
   const date = new Date();
   return (date.getHours() * 60 * 60) + (date.getMinutes() * 60) + date.getSeconds();
  }
+
+ getupdate(){
+  this.socket.received_msg.subscribe((res: any) => {
+   console.log(res)
+   if (res['status']) {
+    this.chat_data.push(res['data']);
+   }
+  })
+ }
+
+ convertSecondsToTime(seconds: number): string {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const formattedHours = hours.toString().padStart(2, '0');
+  const formattedMinutes = minutes.toString().padStart(2, '0');
+  return `${formattedHours}:${formattedMinutes}`;
+}
 
 }

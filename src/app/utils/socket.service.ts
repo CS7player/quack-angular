@@ -9,9 +9,10 @@ import { DbmanagerService } from './dbmanager.service';
 export class SocketService {
  private socket: Socket | null = null;
  private user_list_data = new BehaviorSubject<any>([]);
+ private received_msg_data  = new BehaviorSubject<any>([]);
  private chat_history_data = new Subject();
- private received_msg  = new Subject();
  user_list = this.user_list_data.asObservable();
+ received_msg = this.received_msg_data.asObservable();
  constructor() {
   this.reconnetion();
  }
@@ -33,6 +34,12 @@ export class SocketService {
     }
    });
 
+   this.socket.on('get_user_list', (res) => {
+    if (res['status']) {
+     this.upDateUserList(res['data']);
+    }
+   });
+
    this.socket.on("get_msg", async (data) => {
     this.chat_history_data.next(data)
    })
@@ -41,8 +48,10 @@ export class SocketService {
     this.chat_history_data.next(data)
    })
    
-   this.socket.on("receive_msg", async (data) => {
-    this.chat_history_data.next(data)
+   this.socket.on("receive_msg", (res) => {
+    if (res['status']) {
+     this.getReceivedMsg(res);
+    }
    })
 
    this.socket.on('connect_error', (error) => {
@@ -53,11 +62,7 @@ export class SocketService {
     this.handleConnectionError();
    });
 
-   this.socket.on('get_user_list', (res) => {
-    if (res['status']) {
-     this.upDateUserList(res['data']);
-    }
-   });
+   
   }
  }
 
@@ -107,7 +112,7 @@ export class SocketService {
   return this.chat_history_data.asObservable();
  }
 
- getReceivedMsg(){
-  return this.received_msg.asObservable();
+ getReceivedMsg(data: any){
+  this.received_msg_data.next(data);
  }
 }

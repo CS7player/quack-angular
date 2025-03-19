@@ -14,8 +14,9 @@ export class HeaderComponent {
  @Output() eventEmitter = new EventEmitter();
  isShownUserList: boolean = false;
  showUserList() {
-  this.isShownUserList = true
+  this.isShownUserList = !this.isShownUserList;
   this.eventEmitter.emit(this.isShownUserList);
+  console.log(this.isShownUserList);
  }
 
  logout() {

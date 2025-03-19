@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
  checkURL() {
   this.is_loader = false;
   let url = DbmanagerService.getItem(ConstantsService.URL_KEY);
+  console.log(url)
   if (url) {
    this.is_url_created = true;
    ConstantsService.URl = url;

@@ -45,13 +45,13 @@ export class LayoutComponent implements OnInit {
  }
  get_users() {
   this.socket.user_list.subscribe(data => {
-   this.users_list = data.filter((m: any) => m.user_id != this.user_id);;
-   this.get_username();
+   this.get_username(data);
+   this.users_list = data.filter((m: any) => m.user_id != this.user_id);
   })
  }
 
- get_username() {
-  let user = this.users_list.find((user: any) => user['user_id'] == this.user_id);
+ get_username(data : any) {
+  let user = data.find((user: any) => user['user_id'] == this.user_id);
   if (user) {
    this.username = user['user_name'];
   }
