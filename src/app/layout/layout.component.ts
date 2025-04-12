@@ -18,7 +18,7 @@ import { OutsideClickService } from '../utils/outsideclick.service';
 })
 export class LayoutComponent implements OnInit {
 
- username: string = 'chandra';
+ username: string = 'username';
  users_list: any = [];
  isShownUserList: boolean = false;
  receiver_id: string = '';
@@ -53,7 +53,7 @@ export class LayoutComponent implements OnInit {
  get_username(data : any) {
   let user = data.find((user: any) => user['user_id'] == this.user_id);
   if (user) {
-   this.username = user['user_name'];
+   this.username = user;
   }
  }
  //testing for mergeing chandra51201

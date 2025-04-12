@@ -9,7 +9,7 @@ import { DbmanagerService } from './dbmanager.service';
 export class SocketService {
  private socket: Socket | null = null;
  private user_list_data = new BehaviorSubject<any>([]);
- private received_msg_data  = new BehaviorSubject<any>([]);
+ private received_msg_data = new BehaviorSubject<any>([]);
  private chat_history_data = new Subject();
  user_list = this.user_list_data.asObservable();
  received_msg = this.received_msg_data.asObservable();
@@ -47,7 +47,7 @@ export class SocketService {
    this.socket.on("all_msg", async (data) => {
     this.chat_history_data.next(data)
    })
-   
+
    this.socket.on("receive_msg", (res) => {
     if (res['status']) {
      this.getReceivedMsg(res);
@@ -62,7 +62,7 @@ export class SocketService {
     this.handleConnectionError();
    });
 
-   
+
   }
  }
 
@@ -87,7 +87,7 @@ export class SocketService {
    console.error('Socket not connected. Please connect first.');
   }
  }
- 
+
  getChatHistory(obj: any) {
   if (this.socket) {
    this.socket.emit('get_msg', obj);
@@ -104,6 +104,14 @@ export class SocketService {
   }
  }
 
+ logOut(obj: any) {
+  if (this.socket) {
+   this.socket.emit('logout', obj);
+  } else {
+   console.error('Socket not connected. Please connect first.');
+  }
+ }
+
  upDateUserList(data: any) {
   this.user_list_data.next(data);
  }
@@ -112,7 +120,7 @@ export class SocketService {
   return this.chat_history_data.asObservable();
  }
 
- getReceivedMsg(data: any){
+ getReceivedMsg(data: any) {
   this.received_msg_data.next(data);
  }
 }
