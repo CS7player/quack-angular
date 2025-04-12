@@ -2,7 +2,7 @@
  width: 100vw;
  height: 100vh;
  // background-color: rgb(114, 114, 114);
- background: url("assets/images/test.jpg");
+ background: url("assets/images/wall02.gif");
  background-repeat: no-repeat;
  background-position: center center;
  background-size: cover;
@@ -83,4 +83,10 @@
   background-color: #f0f0f0;
   /* fallback color */
  }
+}
+.title {
+ color: rgb(255, 255, 255);
+ text-align: center;
+ text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 50px #ff0080, 0 0 75px #ff0080;
+ font-size: 5rem;
 }

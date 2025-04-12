@@ -1,4 +1,5 @@
 <div class="home_container">
+<h2 class="title">Quack Chat</h2>
  @if(!is_url_created){
  <input type="text" [(ngModel)]="ip_address" (keydown)="validateIP()" />
  <button type="submit" class="cool-btn" (click)="createConnection()" [disabled]="is_valid">

@@ -15,7 +15,7 @@
 .home_container {
   width: 100vw;
   height: 100vh;
-  background: url("assets/images/test.jpg");
+  background: url("assets/images/wall02.gif");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -93,6 +93,13 @@
     /* fallback color */
   }
 }
+.title {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 50px #ff0080, 0 0 75px #ff0080;
+  font-size: 5rem;
+}
+
 .username_container {
   display: flex;
   justify-content: center;
@@ -112,7 +119,8 @@
 .header {
   width: 100vw;
   height: auto;
-  background-color: rgb(29, 228, 102);
+  background-color: rgb(39, 40, 139);
+  color: white;
 }
 
 .header_container {
@@ -171,7 +179,7 @@
 .user_list {
   width: auto;
   height: 93vh;
-  background-color: rgb(154, 247, 154);
+  background-color: skyblue;
   position: absolute;
   z-index: 9;
   overflow-y: auto;
@@ -224,7 +232,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to bottom right, black, #61dda3);
+  background: linear-gradient(to bottom right, black, skyblue);
   align-items: center;
 }
 
