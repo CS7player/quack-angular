@@ -23,6 +23,7 @@ export class UsersListComponent implements OnInit {
 
  selectUser(item: any) {
   DbmanagerService.setItem('selected_user_id', item['user_id']);
+  DbmanagerService.setItem("selected_username",item['user_name']);
   let isRefresh = DbmanagerService.getItem("is_refresh");
   if (isRefresh) {
    this.eventEmitter.emit(isRefresh + 1);

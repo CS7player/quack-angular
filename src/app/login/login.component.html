@@ -1,7 +1,7 @@
 <div class="home_container">
  @if(!is_url_created){
  <input type="text" [(ngModel)]="ip_address" (keydown)="validateIP()" />
- <button type="submit" (click)="createConnection()" [disabled]="is_valid">
+ <button type="submit" class="cool-btn" (click)="createConnection()" [disabled]="is_valid">
   connect
  </button>
  } @if(is_url_created){

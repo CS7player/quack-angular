@@ -16,7 +16,7 @@ export class OutsideClickService {
    const customCloseElements = document.querySelectorAll('.custom-close')
    const clickedInsideCustomClose = Array.from(customCloseElements).some((element) => element.contains(target));
    if (!clickedInsideCustomClose) {
-    // this.emitClickOutsideEvent();
+    this.emitClickOutsideEvent();
    }
   });
  }

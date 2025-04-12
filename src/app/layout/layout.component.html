@@ -1,6 +1,6 @@
 <div class="layout">
  <div class="header">
-  <app-header [username]="username" (eventEmitter)="isShownUserList = $event"></app-header>
+  <app-header [username]="username" [isRefresh]="isRefresh" (eventEmitter)="isShownUserList = $event"></app-header>
  </div>
  <div class="main-container">
   @if(isShownUserList){

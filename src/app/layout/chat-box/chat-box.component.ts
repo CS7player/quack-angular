@@ -72,7 +72,6 @@ export class ChatBoxComponent implements OnInit {
 
  getupdate(){
   this.socket.received_msg.subscribe((res: any) => {
-   console.log(res)
    if (res['status']) {
     this.chat_data.push(res['data']);
    }

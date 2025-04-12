@@ -1,9 +1,9 @@
 <div class="header_container">
- <button (click)="showUserList()">
+ <button (click)="showUserList()" class="user-btn">
   <i class="fa-solid fa-users fa-lg custom-close" style="color: #45498e;"></i>
  </button>
- <p>{{username['user_name']}}</p>
- <button (click)="logout()">
+ <p class="names">{{username['user_name']+" - "+selected_username}}</p>
+ <button (click)="logout()" class="logout-btn">
   <i class="fa-solid fa-right-from-bracket fa-lg" style="color: #ff0000;"></i>
  </button>
 </div>

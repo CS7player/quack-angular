@@ -1,7 +1,7 @@
 .user_list{
  width: auto;
  height: 93vh;
- background-color: rgb(165, 162, 162);
+ background-color: rgb(154, 247, 154);
  position: absolute;
  z-index: 9;
  overflow-y: auto;
@@ -25,5 +25,15 @@
 }
 
 .high-light{
- background: green;
+ background: rgb(12, 48, 195) !important;
+}
+
+.btn-show{
+ font-size: 1.4rem !important;
+ font-weight: 700;
+ font-family: jetBrains mono, monospace;
+ padding: 0.2rem 0.4rem !important;
+ background-color: black;
+ color: #fff;
+ border-radius: 4px;
 }
