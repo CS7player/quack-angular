@@ -1,4 +1,4 @@
-.username_container{
+.username_container {
  display: flex;
  justify-content: center;
  align-items: center;
@@ -6,9 +6,14 @@
  row-gap: 1rem;
 }
 
-.is_valid{
+.is_valid {
  border: 0.2rem solid green;
 }
-.is_not_valid{
+
+.is_not_valid {
  border: 0.2rem solid red;
+}
+
+.test {
+ background-color: green;
 }
